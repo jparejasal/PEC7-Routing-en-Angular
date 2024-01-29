@@ -1,0 +1,54 @@
+<h2>Registrar un nuevo artículo reactive</h2>
+
+<div *ngIf="message">{{message}}</div> 
+<form [formGroup]="articleReactiveForm" (ngSubmit)="createArticle(articleReactiveForm)">
+    <div>               
+        <input id="id" type="text" placeholder="id del artículo" formControlName="id">
+        <div class="alert alert-danger" *ngIf="articleReactiveForm.get('id').invalid && (articleReactiveForm.get('id').dirty || articleReactiveForm.get('id').touched || registrado)">           
+            <div *ngIf="articleReactiveForm.get('id').errors.required">Identificador del artículo requerido</div>
+            <div *ngIf="articleReactiveForm.get('id').errors.pattern">Identificador del artículo debe ser numérico</div>                       
+        </div>
+    </div>
+    <div>               
+        <input id="nombre" type="text" placeholder="Nombre" formControlName="nombre">
+        <div class="alert alert-danger" *ngIf="articleReactiveForm.get('nombre').invalid && (articleReactiveForm.get('nombre').dirty || articleReactiveForm.get('nombre').touched || registrado)">           
+            <div *ngIf="articleReactiveForm.get('nombre').errors.required">Nombre requerido</div>
+            <div *ngIf="articleReactiveForm.get('nombre').errors?.['invalidName']">Nombre inválido</div>           
+        </div>
+    </div>
+    <div>               
+        <input id="precio" type="text" placeholder="Precio" formControlName="precio">
+        <div class="alert alert-danger" *ngIf="articleReactiveForm.get('precio').invalid && (articleReactiveForm.get('precio').dirty || articleReactiveForm.get('precio').touched || registrado)">           
+            <div *ngIf="articleReactiveForm.get('precio').errors.required">Precio del artículo requerido</div>
+            <div *ngIf="articleReactiveForm.get('precio').errors.pattern">Precio del artículo debe ser numérico</div>            
+            <div *ngIf="articleReactiveForm.get('precio').errors.min">El precio mínimo debe se de 0.1€</div>           
+        </div>
+    </div>
+    <div>               
+        <input id="cantidad" type="text" placeholder="cantidad en inventario" formControlName="cantidad">
+        <div class="alert alert-danger" *ngIf="articleReactiveForm.get('cantidad').invalid && (articleReactiveForm.get('cantidad').dirty || articleReactiveForm.get('cantidad').touched || registrado)">           
+            <div *ngIf="articleReactiveForm.get('cantidad').errors.required">Cantidad en inventario requerida</div>
+            <div *ngIf="articleReactiveForm.get('cantidad').errors.pattern">Cantidad en inventario debe ser numérica</div>
+            <div *ngIf="articleReactiveForm.get('cantidad').errors.min">Cantidad en inventario debe se de mínimo 0</div>                       
+        </div>
+    </div>
+    <!-- <div>        
+        <input id="imagen" type="text" placeholder="URL de la imagen" formControlName="URLimagen">
+        <div class="alert alert-danger" *ngIf="articleReactiveForm.get('URLimagen').invalid && (articleReactiveForm.get('URLimagen').dirty || articleReactiveForm.get('URLimagen').touched || registrado)">           
+            <div *ngIf="articleReactiveForm.get('URLimagen').errors.required">URL de imagen requerida</div>
+            <div *ngIf="articleReactiveForm.get('URLimagen').errors.pattern">URL incorrecta</div>           
+        </div>
+    </div> -->
+    <div>        
+        <input id="imagen" type="text" placeholder="URL de la imagen" formControlName="URLimagen">
+        <div class="alert alert-danger" *ngIf="articleReactiveForm.get('URLimagen').invalid && (articleReactiveForm.get('URLimagen').dirty || articleReactiveForm.get('URLimagen').touched || registrado)">
+            <div *ngIf="articleReactiveForm.get('URLimagen').errors.pattern">URL incorrecta</div>           
+        </div>        
+    </div>
+    <div>
+        <label for="venta">Está a la venta? </label>
+        <input id="venta" type="checkbox" formControlName="venta">
+    </div>
+    <button type="submit">Registrar</button>
+    <!-- <button type="submit" [disabled]="!articleReactiveForm.valid">Submit</button> -->
+</form>

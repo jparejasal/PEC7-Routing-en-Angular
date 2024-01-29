@@ -1,0 +1,33 @@
+<h2>Registrar un nuevo artículo template</h2>
+
+<div class="form-group">
+    <form (ngSubmit)="createArticleTemplate(articleTemplateForm)" #articleTemplateForm="ngForm">
+        <div ngModelGroup="article">            
+            <div class="article-name">
+                <input type="text" placeholder="Nombre" #nombre="ngModel" required  name="nombre" ngModel>
+                <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched || registrado)">           
+                    <div *ngIf="nombre.errors.required">Nombre requerido</div>                               
+                </div>
+            </div>                       
+            <div class="article-imageUrl">
+                <input type="text" placeholder="URL de imagen" #imagenUrl="ngModel" name="imagenUrl" required pattern="https?://.+" ngModel>
+                <div class="alert alert-danger" *ngIf="imagenUrl.invalid && (imagenUrl.dirty || imagenUrl.touched || registrado)">           
+                    <div *ngIf="imagenUrl.errors.required">URL de imagen requerida</div>
+                    <div *ngIf="imagenUrl.errors.pattern">URL no válida</div>                              
+                </div>
+            </div>
+            <div class="article-price">
+                <input type="text" placeholder="Precio" #precio="ngModel" name="precio" required pattern="[0-9]+([\.,][0-9]+)?" min="0.1" ngModel>
+                <div class="alert alert-danger" *ngIf="precio.invalid && (precio.dirty || precio.touched || registrado)">           
+                    <div *ngIf="precio.errors.required">Precio requerido</div>
+                    <div *ngIf="precio.errors.min">Debe ser mayor que 0.1€</div>
+                    <div *ngIf="precio.errors.pattern">Debe ser numércio</div>                              
+                </div>
+            </div>            
+            <div class="article-isOnSale">
+                <input type="checkbox" name="venta" ngModel> A la venta?
+            </div>
+        </div>
+        <button type="submit" (click)="registrado=true">Registrar</button>
+    </form>
+</div>

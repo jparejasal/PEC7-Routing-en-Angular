@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center">
+                    <h1>Registro de usuarios</h1>
+                    <h6>Regístrate en nuestro sistema</h6>
+                </div>
+                <form [formGroup]="formularioRegistro" (ngSubmit)="registrarUsuario(formularioRegistro)">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nombre usuario:</label>
+                        <input formControlName="username" type="text" class="form-control" id="unername">
+                        <div class="alert alert-danger" *ngIf="formularioRegistro.get('username').invalid && (formularioRegistro.get('username').dirty || formularioRegistro.get('username').touched)">           
+                            <div *ngIf="formularioRegistro.get('username').errors.required">Nombre de usuario requerido</div>                                                   
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input formControlName="password" type="password" class="form-control" id="password">
+                        <div class="alert alert-danger" *ngIf="formularioRegistro.get('password').invalid && (formularioRegistro.get('password').dirty || formularioRegistro.get('password').touched)">           
+                            <div *ngIf="formularioRegistro.get('password').errors.required">Password requerido</div>
+                        </div>
+                    </div>    
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+                <a routerLink="/login">¿Ya eres usuario?, Click para ir al login</a>
+            </div>
+        </div>
+    </div>
+</div>
