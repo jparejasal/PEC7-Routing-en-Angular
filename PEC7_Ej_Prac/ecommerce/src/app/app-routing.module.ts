@@ -7,6 +7,12 @@ import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { authGuard } from './guards/auth.guard';
 
+// Intento de crear rutas para lazy loading
+const myroutes: Routes = [   
+  {path:'user', loadChildren:()=>import('./user/user-routing/user-routing.module').then(m=>m.UserRoutingModule)},
+  {path:'article', loadChildren:()=>import('./article/article-routing/article-routing.module').then(m=>m.ArticleRoutingModule)},  
+];
+
 const routes: Routes = [
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'Articulos', component:ArticleListComponent, canActivate: [authGuard]},
